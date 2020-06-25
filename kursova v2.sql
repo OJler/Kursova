@@ -22,16 +22,26 @@ constraint fk_position_employee foreign key (position_id) REFERENCES positions (
 office_id INT,
 constraint fk_office_employee FOREIGN KEY (office_id) REFERENCES office (office_id));
 	insert into employee values(null,'Igor','Smirnof',1,1);
+    insert into employee values(null,'Oleg','Kuzmenko',2,2);
+    insert into employee values(null,'Irina','Pidgrushna',3,3);
+    insert into employee values(null,'Max','Fetisov',4,4);
 
 USE f1rm;
 CREATE TABLE positions(
 position_id INT AUTO_INCREMENT PRIMARY KEY,
 position_name VARCHAR(30),
 salary INT,
-bonus int,
-office_id int,
-constraint fk_office_id foreign key (office_id) references office (office_id));
-insert into positions Values(null, 'cleaner',7000,1000,1);
+bonus int);
+insert into positions Values(null, 'cleaner',7000,300);
+insert into positions Values(null, 'manager',15000,1000);
+insert into positions Values(null, 'constructors',13000,1200);
+insert into positions Values(null, 'accountants',10000,1000);
+insert into positions Values(null, 'director',17000,2000);
+insert into positions Values(null, 'worker',10000,800);
+insert into positions Values(null, 'engenier',13000,1000);
+insert into positions Values(null, 'technologist',12000,1100);
+insert into positions Values(null, 'warehouseman',10000,700);
+insert into positions Values(null, 'security',9000,1000);
 
 use f1rm;
 create table article(
@@ -67,14 +77,14 @@ customer_id INT AUTO_INCREMENT PRIMARY KEY,
   ordering_id INT AUTO_INCREMENT PRIMARY KEY,
   ordering_type VARCHAR(30),
   article_id int,
-       constraint fk_article_id2 foreign key (article_id) references article (article_id),
-       office_id int,
-       constraint fk_office_id2 foreign key (office_id) references office (office_id),
+       constraint fk_article_id foreign key (article_id) references article (article_id),
        employee_id int,
-       constraint fk_employee_id2 foreign key (employee_id) references employee (employee_id),
+       constraint fk_employee_id foreign key (employee_id) references employee (employee_id),
        amount int);
-       insert into ordering values(null,'output',5,2,2,10);
-       insert into ordering values(null,'input',4,3,2,5);
+       insert into ordering values(null,'output',5,2,10);
+       insert into ordering values(null,'input',4,3,5);
+       insert into ordering values(null,'output',7,4,7);
+       insert into ordering values(null,'input',9,1,2);
        
        
      use f1rm;  
@@ -82,15 +92,15 @@ customer_id INT AUTO_INCREMENT PRIMARY KEY,
          bill_id INT AUTO_INCREMENT PRIMARY KEY,
          bill_type varchar(30),
              article_id int,
-			 constraint fk_article_id3 foreign key (article_id) references article (article_id),
-             office_id int,
-             constraint fk_office_id3 foreign key (office_id) references office (office_id),
+			 constraint fk_article_id2 foreign key (article_id) references article (article_id),
              employee_id int,
-			 constraint fk_employee_id3 foreign key (employee_id) references employee (employee_id),
-              customer_id int,
+			 constraint fk_employee_id2 foreign key (employee_id) references employee (employee_id),
+              customer_id int ,
+              constraint fk_customer_id2 foreign key (customer_id) references customer (customer_id),
 				amount int,
                 summ int);
-					insert into bill values(null,'input',9,3,2,2,10,45000);
+					insert into bill values(null,'input',9,2,2,10,45000);
+                    insert into bill values(null,'output',3,1,3,10,22000);
        
   
   
